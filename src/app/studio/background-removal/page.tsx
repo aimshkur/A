@@ -14,6 +14,7 @@ const backgrounds = [
 
 export default function BackgroundRemovalPage() {
   const [file, setFile] = useState<File | null>(null);
+  const [requestedTask, setRequestedTask] = useState("");
   const [preview, setPreview] = useState("");
   const [mode, setMode] = useState<"quick" | "pro">("quick");
   const [background, setBackground] = useState("transparent");
@@ -22,6 +23,11 @@ export default function BackgroundRemovalPage() {
   const [columns, setColumns] = useState<1 | 2 | 3>(2);
   const [showSettings, setShowSettings] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const incomingTask = new URLSearchParams(window.location.search).get("task");
+    if (incomingTask) setRequestedTask(incomingTask);
+  }, []);
 
   useEffect(() => {
     if (!file) { setPreview(""); return; }
@@ -52,7 +58,7 @@ export default function BackgroundRemovalPage() {
 
         <section className="studio-workspace">
           <div className="studio-heading">
-            <div><span className="studio-kicker">أداة تجهيز صور السيارات</span><h1>إزالة خلفية السيارة</h1><p>اعزل السيارة عن الخلفية، ثم اختر المظهر المناسب لصورتك.</p></div>
+            <div><span className="studio-kicker">أداة تجهيز صور السيارات</span><h1>إزالة خلفية السيارة</h1><p>اعزل السيارة عن الخلفية، ثم اختر المظهر المناسب لصورتك.</p>{requestedTask && <div className="requested-task"><b>طلبك:</b> {requestedTask}</div>}</div>
             <div className="mode-control" aria-label="وضع العمل"><button type="button" className={mode === "quick" ? "active" : ""} onClick={() => setMode("quick")}>سريع</button><button type="button" className={mode === "pro" ? "active" : ""} onClick={() => setMode("pro")}>احترافي</button></div>
           </div>
 
