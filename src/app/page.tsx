@@ -59,7 +59,7 @@ export default function HomePage() {
           <textarea ref={inputRef} value={task} onChange={(e) => setTask(e.target.value)} placeholder="مثال: احذف خلفية صور السيارة وخليها في استوديو أبيض..." aria-label="اكتب المهمة التي تريد تنفيذها" />
           <div className="composer-bottom">
             <div className="composer-tools"><button type="button" onClick={() => document.getElementById("home-upload")?.click()}>＋ <span>إرفاق صورة</span></button><input id="home-upload" type="file" accept="image/*" hidden /><span className="mode-switch"><button className={mode === "quick" ? "selected" : ""} onClick={() => setMode("quick")} type="button">سريع</button><button className={mode === "pro" ? "selected" : ""} onClick={() => setMode("pro")} type="button">احترافي</button></span></div>
-            <Link className={task.trim() ? "primary-button" : "primary-button soft-disabled"} href={task.trim() ? "/studio/background-removal" : "#suggested"} onClick={() => { if (!task.trim()) inputRef.current?.focus(); }}>راجع خطة التنفيذ <span>←</span></Link>
+            <Link className={task.trim() ? "primary-button" : "primary-button soft-disabled"} href={task.trim() ? `/studio/background-removal?task=${encodeURIComponent(task.trim())}` : "#suggested"} onClick={() => { if (!task.trim()) inputRef.current?.focus(); }}>راجع خطة التنفيذ <span>←</span></Link>
           </div>
           <div className="composer-hint">لا يبدأ أي نشر أو إرسال أو إجراء خارجي بدون موافقتك.</div>
         </section>
