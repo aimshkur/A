@@ -1,3 +1,7 @@
+"use client";
+
+import Link from "next/link";
+
 const tasks = [
   {
     number: "01",
@@ -23,13 +27,13 @@ export default function HomePage() {
   return (
     <main className="shell">
       <header className="topbar">
-        <a className="brand" href="/" aria-label="مهارتي الرئيسية">
+        <Link className="brand" href="/" aria-label="مهارتي الرئيسية">
           <span className="brand-mark">م</span>
           <span>
             <strong>مهارتي</strong>
             <small>MAHARTY AI</small>
           </span>
-        </a>
+        </Link>
         <div className="topbar-meta">
           <span className="status-dot" />
           مساحة عملك الذكية
